@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Signalization))]
+[RequireComponent(typeof(AudioSource))]
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AlarmSystem _alarmSystem;
+    [SerializeField] private Signalization _signalization;
     [SerializeField] private AudioSource _sound;
     [SerializeField] private float _maxVolume;
 
@@ -11,8 +13,9 @@ public class Alarm : MonoBehaviour
     private Coroutine _startCoroutine;
     private Coroutine _stopCoroutine;
 
-    private void Start()
+    private void Awake()
     {
+        _signalization = GetComponent<Signalization>();
         _sound = GetComponent<AudioSource>();
 
         _sound.volume = 0f;        
@@ -21,14 +24,14 @@ public class Alarm : MonoBehaviour
 
     private void OnEnable()
     {
-        _alarmSystem.OnActivated += MakeLoud;
-        _alarmSystem.OnDisabled += MakeSilent;
+        _signalization.OnActivated += MakeLoud;
+        _signalization.OnDisabled += MakeSilent;
     }
 
     private void OnDisable()
     {
-        _alarmSystem.OnActivated -= MakeLoud;
-        _alarmSystem.OnDisabled -= MakeSilent;
+        _signalization.OnActivated -= MakeLoud;
+        _signalization.OnDisabled -= MakeSilent;
     }
 
     private void MakeLoud()

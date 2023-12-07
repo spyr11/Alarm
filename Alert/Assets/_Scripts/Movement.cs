@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class Movement : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;

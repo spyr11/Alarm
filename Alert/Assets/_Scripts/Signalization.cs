@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AlarmSystem : MonoBehaviour
+public class Signalization : MonoBehaviour
 {
     public event UnityAction OnActivated;
     public event UnityAction OnDisabled;
